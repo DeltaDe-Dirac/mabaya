@@ -19,8 +19,8 @@ class PreloadCampaigns {
 	@Bean
 	CommandLineRunner initCampaings(CampaignRepo repository) {
 		return args -> {
-			LOG.info(repository.save(new Campaign("MobilePromo", 1, "1", Timestamp.valueOf("2021-10-11"))).toString());	
-			LOG.info(repository.save(new Campaign("HardwarePromo", 2, "2,3", Timestamp.valueOf("2021-10-01"))).toString());
+			LOG.info(repository.save(new Campaign("MobilePromo", 1, "1", Timestamp.valueOf("2021-10-11 16:17:03"))).toString());	
+			LOG.info(repository.save(new Campaign("HardwarePromo", 2, "2,3", Timestamp.valueOf("2021-10-01 16:17:03"))).toString());
 		};
 	}
 }
