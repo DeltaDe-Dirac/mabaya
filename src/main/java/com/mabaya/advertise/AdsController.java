@@ -1,13 +1,16 @@
 package com.mabaya.advertise;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mabaya.advertise.entities.Campaign;
 import com.mabaya.advertise.entities.Product;
+import com.mabaya.advertise.entities.cust.IProductCust;
 import com.mabaya.advertise.repos.CampaignRepo;
 import com.mabaya.advertise.repos.ProductRepo;
 
@@ -29,6 +32,13 @@ public class AdsController {
 	@GetMapping("/campaigns")
 	public List<Campaign> campaigns() {
 		return campaignRepo.findAll();
+	}
+	
+	@GetMapping("/advertise/{cat}")
+	public List<IProductCust> advertise(@PathVariable String cat) {
+		List<IProductCust> optProduct = productRepo.getProductByCategory(cat);
+
+		return optProduct;
 	}
 	
 	@GetMapping("/hello")
