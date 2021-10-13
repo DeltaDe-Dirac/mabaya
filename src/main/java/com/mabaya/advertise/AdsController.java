@@ -65,7 +65,7 @@ public class AdsController {
 	
 	@GetMapping("/createCampaign")
 	@ResponseBody
-	public String addFoo(@RequestParam String name, @RequestParam int bid, @RequestParam String prodList, @RequestParam Timestamp startDate) {
+	public String addCampaign(@RequestParam String name, @RequestParam int bid, @RequestParam String prodList, @RequestParam Timestamp startDate) {
 		return campaignRepo.save(new Campaign(name, bid, prodList, startDate)).toString();
 	}
 }
