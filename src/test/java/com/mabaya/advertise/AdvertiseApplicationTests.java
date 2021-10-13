@@ -73,14 +73,14 @@ class AdvertiseApplicationTests {
 		assertEquals("Prod1-Cat4", promotedProduct.getTitle());
 	}
 	
-	@Test
-	void createCampaign() throws Exception {
-		String newCampaign =  controller.addCampaign("NewPromo", 9999, "7", Timestamp.valueOf(LocalDateTime.now().minusDays(12)));
-		assertNotNull(newCampaign);
-		
-		controller.setDaysActivePeriod(12);
-		IProductCust promotedProduct =  controller.advertise("Cat4");
-		assertNotNull(promotedProduct);
-		assertEquals("Prod3-Cat4", promotedProduct.getTitle());
-	}
+//	@Test
+//	void createCampaign() throws Exception {
+//		String newCampaign =  controller.addCampaign("NewPromo", 9999, "7", Timestamp.valueOf(LocalDateTime.now().minusDays(12)));
+//		assertNotNull(newCampaign);
+//		
+//		controller.setDaysActivePeriod(12);
+//		IProductCust promotedProduct =  controller.advertise("Cat4");
+//		assertNotNull(promotedProduct);
+//		assertEquals("Prod3-Cat4", promotedProduct.getTitle());
+//	}
 }
