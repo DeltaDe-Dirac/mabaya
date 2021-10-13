@@ -63,18 +63,28 @@ public class AdsController {
 		return null;
 	}
 	
-	
-//	@GetMapping("/createCampaign")
-//	@ResponseBody
-//	public String addCampaign(@RequestParam String name, @RequestParam int bid, @RequestParam String prodList, @RequestParam Timestamp startDate) {
-//		return campaignRepo.save(new Campaign(name, bid, prodList, startDate)).toString();
-//	}
-	
 	@PostMapping("/createCampaign")
-	public Campaign addCampaign(@RequestBody CampaignDto newCampaignDto) {
-		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-		modelMapper.typeMap(CampaignDto.class, Campaign.class);
-		Campaign newCampaign = modelMapper.map(newCampaignDto, Campaign.class);
-		return campaignRepo.save(newCampaign);
+	public String addCampaign(@RequestBody CampaignDto newCampaignDto) {
+		String vlidationMessage = validate(newCampaignDto);
+		
+		if(vlidationMessage == null) {
+			
+			modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+			modelMapper.typeMap(CampaignDto.class, Campaign.class);
+			Campaign newCampaign = modelMapper.map(newCampaignDto, Campaign.class);
+			return campaignRepo.save(newCampaign).toString();
+		}
+		
+		return vlidationMessage;
+	}
+	
+	private String validate(CampaignDto newCampaignDto) {
+		if(null == newCampaignDto.getName() || null == newCampaignDto.getProdList() 
+				|| newCampaignDto.getProdList().isEmpty() || null == newCampaignDto.getStartDate())
+		{
+			return "One or more fields are missing: [name,bid,startDate,prodList]";
+		}
+		
+		return null;		
 	}
 }
