@@ -1,10 +1,19 @@
 package com.mabaya.advertise;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mabaya.advertise.entities.Campaign;
 import com.mabaya.advertise.entities.cust.ICampaignCust;
 import com.mabaya.advertise.entities.cust.IProductCust;
 import com.mabaya.advertise.repos.CampaignRepo;
@@ -51,5 +60,12 @@ public class AdsController {
 		}
 		
 		return null;
+	}
+	
+	
+	@GetMapping("/createCampaign")
+	@ResponseBody
+	public String addFoo(@RequestParam String name, @RequestParam int bid, @RequestParam String prodList, @RequestParam Timestamp startDate) {
+		return campaignRepo.save(new Campaign(name, bid, prodList, startDate)).toString();
 	}
 }
