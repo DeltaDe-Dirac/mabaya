@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -78,18 +80,48 @@ class AdvertiseApplicationTests {
 	@Test
 	void createCampaign() throws Exception {
 		CampaignDto newCampaignDto = new CampaignDto();
+
 		newCampaignDto.setBid(9999);
 		newCampaignDto.setName("NewTestPromo");
 		newCampaignDto.setProdList("7,90");
 		newCampaignDto.setStartDate(Timestamp.valueOf(LocalDateTime.now().minusDays(12)));
-		
+
 		String newCampaign = controller.addCampaign(newCampaignDto);
 		assertNotNull(newCampaign);
-		assertNotEquals("One or more fields are missing: [name,startDate,prodList]", newCampaign);		
+		assertNotEquals("One or more fields are missing: [name,startDate,prodList]", newCampaign);
 
 		controller.setDaysActivePeriod(12);
 		IProductCust promotedProduct = controller.advertise("Cat4");
 		assertNotNull(promotedProduct);
 		assertEquals("Prod3-Cat4", promotedProduct.getTitle());
+	}
+
+	@Test
+	void dontCreateCampaignOnMissingParameter() throws Exception {
+		CampaignDto newCampaignDto = new CampaignDto();
+
+		newCampaignDto.setProdList("7,90");
+		newCampaignDto.setStartDate(Timestamp.valueOf(LocalDateTime.now().minusDays(12)));
+
+		String newCampaign = controller.addCampaign(newCampaignDto);
+		assertNotNull(newCampaign);
+		assertEquals("One or more fields are missing: [name,startDate,prodList]", newCampaign);
+	}
+
+	@Test
+	void dontCreateCampaignOnInvalidDateFormat() throws Exception {
+		CampaignDto newCampaignDto = new CampaignDto();
+
+		newCampaignDto.setBid(99999);
+		newCampaignDto.setName("NewTestPromo");
+		newCampaignDto.setProdList("6,90");
+		
+		try {
+			newCampaignDto.setStartDate(Timestamp.valueOf("2021-10-12"));
+		} catch (Exception e) {
+			return;
+		}
+		
+		fail();
 	}
 }
