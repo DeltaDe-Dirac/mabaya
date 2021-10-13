@@ -18,9 +18,13 @@ class PreloadProducts {
 	CommandLineRunner initProducts(ProductRepo repository) {
 
 		return args -> {
-			LOG.info(repository.save(new Product("Apple MacBook Pro", "Laptop", 5000)).toString());
-			LOG.info(repository.save(new Product("Garmin Forerunner", "Smart Watch", 1234)).toString());
-			LOG.info(repository.save(new Product("Samsung Odyssey G5", "Monitor", 1719)).toString());		
+			LOG.info(repository.save(new Product("Prod1-Cat1", "Cat1", 5000)).toString());
+			LOG.info(repository.save(new Product("Prod2-Cat1", "Cat1", 6000)).toString());
+			LOG.info(repository.save(new Product("Prod1-Cat2", "Cat2", 1234)).toString());
+			LOG.info(repository.save(new Product("Prod1-Cat3", "Cat3", 4000)).toString());
+			LOG.info(repository.save(new Product("Prod1-Cat4", "Cat4", 1719)).toString());
+			LOG.info(repository.save(new Product("Prod2-Cat4", "Cat4", 1720)).toString());
+			LOG.info(repository.save(new Product("Prod3-Cat4", "Cat4", 1721)).toString());
 		};
 	}
 }
