@@ -82,7 +82,7 @@ public class AdsController {
 		if(null == newCampaignDto.getName() || null == newCampaignDto.getProdList() 
 				|| newCampaignDto.getProdList().isEmpty() || null == newCampaignDto.getStartDate())
 		{
-			return "One or more fields are missing: [name,bid,startDate,prodList]";
+			return "One or more fields are missing: [name,startDate,prodList]";
 		}
 		
 		return null;		
