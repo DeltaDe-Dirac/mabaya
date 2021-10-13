@@ -23,7 +23,8 @@ class PreloadCampaigns {
 			LOG.info(repository.save(new Campaign("Promo2", 9, "8,9,10,1", Timestamp.valueOf(LocalDateTime.now().minusDays(2)))).toString());
 			LOG.info(repository.save(new Campaign("Promo3", 90, "8,9,2,10", Timestamp.valueOf(LocalDateTime.now().minusDays(3)))).toString());
 			LOG.info(repository.save(new Campaign("Promo4", 10, "4", Timestamp.valueOf(LocalDateTime.now().minusDays(5)))).toString());			
-			LOG.info(repository.save(new Campaign("Promo5", 20, "6,7,1", Timestamp.valueOf(LocalDateTime.now().minusDays(10)))).toString());
+			LOG.info(repository.save(new Campaign("Promo5", 200, "1,2,3,4,5", Timestamp.valueOf(LocalDateTime.now().minusDays(10)))).toString());
+			LOG.info(repository.save(new Campaign("Promo6", 2000, "1,2,3,4,6", Timestamp.valueOf(LocalDateTime.now().minusDays(11)))).toString());
 		};
 	}
 }

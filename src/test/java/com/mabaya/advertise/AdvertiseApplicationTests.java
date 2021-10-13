@@ -54,10 +54,19 @@ class AdvertiseApplicationTests {
 	
 	@Test
 	void activeCampaignMatchingCategoryMaxBid() throws Exception {
-		controller.setDaysActivePeriod(3);
+		controller.setDaysActivePeriod(5);
 		
 		IProductCust promotedProduct =  controller.advertise("Cat1");
 		assertNotNull(promotedProduct);
 		assertEquals("Prod2-Cat1", promotedProduct.getTitle());
+	}
+	
+	@Test
+	void activeCampaignEdgeCase() throws Exception {
+		controller.setDaysActivePeriod(10);
+		
+		IProductCust promotedProduct =  controller.advertise("Cat4");
+		assertNotNull(promotedProduct);
+		assertEquals("Prod1-Cat4", promotedProduct.getTitle());
 	}
 }
